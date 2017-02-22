@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<tabs>
+    <tab
+        id="@+id/tab_book"
+        icon="@mipmap/ic_book"
+        title="@string/book" />
+    <tab
+        id="@+id/tab_movie"
+        icon="@mipmap/ic_movie"
+        title="@string/movie" />
+    <tab
+        id="@+id/tab_music"
+        icon="@mipmap/ic_music"
+        title="@string/music" />
+</tabs>
