@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/menu_android"
+        android:title="@string/Android"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/menu_ios"
+        android:title="@string/IOS"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/menu_qianduan"
+        android:title="@string/qianduan"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/menu_expand_resources"
+        android:title="@string/expand_resources"
+        app:showAsAction="never" />
+
+</menu>

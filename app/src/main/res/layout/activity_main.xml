@@ -7,12 +7,24 @@
     android:layout_height="match_parent"
     tools:context="com.jiangpingwei.cowpea.MainActivity">
 
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/tl_main"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:elevation="2dp"
+        app:title="@string/app_name"
+        app:titleTextColor="@android:color/white">
+
+    </android.support.v7.widget.Toolbar>
+
     <!-- This could be your fragment container, or something -->
     <FrameLayout
         android:id="@+id/content_container_main"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/bb_main" />
+        android:layout_above="@+id/bb_main"
+        android:layout_below="@+id/tl_main" />
 
     <com.roughike.bottombar.BottomBar
         android:id="@+id/bb_main"

@@ -1,4 +1,4 @@
-package com.jiangpingwei.cowpea.zhijin;
+package com.jiangpingwei.cowpea.chongdian;
 
 import com.jiangpingwei.cowpea.BasePresenter;
 import com.jiangpingwei.cowpea.BaseView;
@@ -7,23 +7,22 @@ import com.jiangpingwei.cowpea.data.Results;
 import java.util.List;
 
 /**
- * Created by jiangpingwei on 2017/3/8.
+ * Created by jiangpingwei on 2017/3/10.
  */
 
-public interface ZhijinContract {
-    interface View extends BaseView<Presenter> {
+public interface ChongdianContract {
 
+    interface View extends BaseView<Present> {
         void showProgress();
 
         void hideProgress();
 
-        void showPhotos();
+        void showDatas();
 
         void showError();
-
     }
 
-    interface Presenter extends BasePresenter{
+    interface Present extends BasePresenter {
 
         List<Results> getData();
     }

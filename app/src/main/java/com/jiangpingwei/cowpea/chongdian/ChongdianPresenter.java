@@ -1,9 +1,8 @@
-package com.jiangpingwei.cowpea.zhijin;
+package com.jiangpingwei.cowpea.chongdian;
 
-
+import com.jiangpingwei.cowpea.data.ChongdianDataSource;
+import com.jiangpingwei.cowpea.data.ChongdianRepository;
 import com.jiangpingwei.cowpea.data.Results;
-import com.jiangpingwei.cowpea.data.ZhijinDataSource;
-import com.jiangpingwei.cowpea.data.ZhijinRepository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,13 +10,13 @@ import java.util.List;
 import io.reactivex.internal.subscriptions.ArrayCompositeSubscription;
 
 /**
- * Created by jiangpingwei on 2017/3/8.
+ * Created by jiangpingwei on 2017/3/10.
  */
 
-public class ZhijinPresenter implements ZhijinContract.Presenter {
+public class ChongdianPresenter implements ChongdianContract.Present {
 
-    private ZhijinRepository mZhijinRepository;
-    private ZhijinContract.View mView;
+    private ChongdianRepository mChongdianRepository;
+    private ChongdianContract.View mView;
 
     private ArrayCompositeSubscription mSubscriptions;
 
@@ -27,9 +26,9 @@ public class ZhijinPresenter implements ZhijinContract.Presenter {
         return data;
     }
 
-    public ZhijinPresenter(ZhijinContract.View view, ZhijinRepository zhijinRepository) {
+    public ChongdianPresenter(ChongdianContract.View view, ChongdianRepository chongdianRepository) {
         mView = view;
-        mZhijinRepository = zhijinRepository;
+        mChongdianRepository = chongdianRepository;
 
         mSubscriptions = new ArrayCompositeSubscription(1);
 
@@ -38,7 +37,7 @@ public class ZhijinPresenter implements ZhijinContract.Presenter {
 
     @Override
     public void subscribe(String dataType, int pageNO) {
-        loadPhotos(pageNO);
+        loadData(dataType, pageNO);
     }
 
     @Override
@@ -46,14 +45,14 @@ public class ZhijinPresenter implements ZhijinContract.Presenter {
         mSubscriptions.dispose();
     }
 
-    private void loadPhotos(final int pageNO) {
+    private void loadData(String dataType, int pageNO) {
         mView.showProgress();
 
-        mZhijinRepository.getPhotos(new ZhijinDataSource.GetPhotosCallback() {
+        mChongdianRepository.getData(new ChongdianDataSource.getDataCallback() {
             @Override
-            public void onGetPhotoed(List<Results> resultses) {
+            public void onGetDataed(List<Results> resultses) {
                 data = resultses;
-                mView.showPhotos();
+                mView.showDatas();
                 mView.hideProgress();
             }
 
@@ -61,6 +60,6 @@ public class ZhijinPresenter implements ZhijinContract.Presenter {
             public void onFail() {
                 mView.showError();
             }
-        }, pageNO);
+        }, dataType, pageNO);
     }
 }

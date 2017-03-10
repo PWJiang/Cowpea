@@ -15,8 +15,8 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.jiangpingwei.cowpea.R;
-import com.jiangpingwei.cowpea.zhijin.data.Results;
-import com.jiangpingwei.cowpea.zhijin.data.ZhijinRepository;
+import com.jiangpingwei.cowpea.data.Results;
+import com.jiangpingwei.cowpea.data.ZhijinRepository;
 
 import java.util.List;
 import java.util.Random;
@@ -54,7 +54,7 @@ public class ZhijinFragment extends Fragment implements ZhijinContract.View {
         swlZhijin.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                mPresenter.subscribe(random.nextInt(10));
+                mPresenter.subscribe(null, random.nextInt(10));
             }
         });
 
@@ -95,7 +95,7 @@ public class ZhijinFragment extends Fragment implements ZhijinContract.View {
     @Override
     public void onResume() {
         super.onResume();
-        mPresenter.subscribe(random.nextInt(10));
+        mPresenter.subscribe(null, random.nextInt(10));
     }
 
     @Override
@@ -124,7 +124,7 @@ public class ZhijinFragment extends Fragment implements ZhijinContract.View {
         @Override
         public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
             ZhijinViewHolder zhijinViewHolder = (ZhijinViewHolder) holder;
-            Glide.with(context).load(mList.get(position).getUrl()).fitCenter().into(zhijinViewHolder.ivItemZhijin);
+            Glide.with(context).load(mList.get(position).getUrl()).centerCrop().into(zhijinViewHolder.ivItemZhijin);
         }
 
         @Override

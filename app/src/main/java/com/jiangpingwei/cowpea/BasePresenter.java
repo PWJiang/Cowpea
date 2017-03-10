@@ -5,6 +5,6 @@ package com.jiangpingwei.cowpea;
  */
 
 public interface BasePresenter {
-    void subscribe(int pageNO);
+    void subscribe(String dataType, int pageNO);
     void unsubscribe();
 }

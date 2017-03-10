@@ -1,4 +1,6 @@
-package com.jiangpingwei.cowpea.zhijin.data;
+package com.jiangpingwei.cowpea.data;
+
+import java.util.List;
 
 /**
  * Created by jiangpingwei on 2017/3/8.
@@ -8,6 +10,8 @@ public class Results {
     private String _id;
 
     private String createdAt;
+
+    private List<String> images ;
 
     private String desc;
 
@@ -29,6 +33,14 @@ public class Results {
 
     public String get_id() {
         return this._id;
+    }
+
+    public List<String> getImages() {
+        return images;
+    }
+
+    public void setImages(List<String> images) {
+        this.images = images;
     }
 
     public void setCreatedAt(String createdAt) {

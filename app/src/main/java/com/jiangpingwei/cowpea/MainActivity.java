@@ -5,14 +5,14 @@ import android.support.annotation.IdRes;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 
-import com.jiangpingwei.cowpea.zhijin.ZhijinFragment;
-import com.jiangpingwei.cowpea.movie.MovieFragment;
 import com.jiangpingwei.cowpea.chongdian.ChongdianFragment;
-import com.jiangpingwei.cowpea.zhijin.ZhijinPresenter;
-import com.jiangpingwei.cowpea.zhijin.data.ZhijinRepository;
+import com.jiangpingwei.cowpea.movie.MovieFragment;
+import com.jiangpingwei.cowpea.zhijin.ZhijinFragment;
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnTabSelectListener;
 
@@ -27,6 +27,8 @@ public class MainActivity extends AppCompatActivity {
     RelativeLayout activityMain;
     @BindView(R.id.content_container_main)
     FrameLayout contentContainerMain;
+    @BindView(R.id.tl_main)
+    Toolbar tlMain;
 
     private ZhijinFragment zhijinFragment;
     private MovieFragment movieFragment;
@@ -37,6 +39,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+
+        setSupportActionBar(tlMain);
 
         initFragment();
 
@@ -56,6 +60,8 @@ public class MainActivity extends AppCompatActivity {
 
                         transation.replace(R.id.content_container_main, zhijinFragment);
                         transation.commit();
+
+                        tlMain.getMenu().clear();
                         break;
                     case R.id.tab_movie:
                         if (movieFragment == null) {
@@ -64,6 +70,8 @@ public class MainActivity extends AppCompatActivity {
 
                         transation.replace(R.id.content_container_main, movieFragment);
                         transation.commit();
+
+                        tlMain.getMenu().clear();
                         break;
                     case R.id.tab_music:
                         if (chongdianFragment == null) {
@@ -72,6 +80,8 @@ public class MainActivity extends AppCompatActivity {
 
                         transation.replace(R.id.content_container_main, chongdianFragment);
                         transation.commit();
+
+                        tlMain.inflateMenu(R.menu.menu_chongdian);
                         break;
                 }
             }

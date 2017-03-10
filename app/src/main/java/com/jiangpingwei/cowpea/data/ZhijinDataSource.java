@@ -1,4 +1,4 @@
-package com.jiangpingwei.cowpea.zhijin.data;
+package com.jiangpingwei.cowpea.data;
 
 import java.util.List;
 

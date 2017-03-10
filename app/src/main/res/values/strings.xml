@@ -4,4 +4,8 @@
     <string name="movie">视频</string>
     <string name="chongdian">充电</string>
     <string name="error">出错啦...</string>
+    <string name="Android">Android</string>
+    <string name="IOS">IOS</string>
+    <string name="qianduan">前端</string>
+    <string name="expand_resources">拓展资源</string>
 </resources>

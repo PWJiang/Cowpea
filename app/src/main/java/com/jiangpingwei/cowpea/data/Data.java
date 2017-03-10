@@ -1,4 +1,4 @@
-package com.jiangpingwei.cowpea.zhijin.data;
+package com.jiangpingwei.cowpea.data;
 
 import java.util.List;
 
@@ -6,7 +6,7 @@ import java.util.List;
  * Created by jiangpingwei on 2017/3/8.
  */
 
-public class Photos {
+public class Data {
     private boolean error;
     private List<Results> results;
 

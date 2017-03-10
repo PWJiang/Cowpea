@@ -1,6 +1,4 @@
-package com.jiangpingwei.cowpea.zhijin.data;
-
-import android.util.Log;
+package com.jiangpingwei.cowpea.data;
 
 import com.jiangpingwei.cowpea.zhijin.ZhijinService;
 
@@ -35,7 +33,7 @@ public class ZhijinRepository implements ZhijinDataSource {
         zhijinService.getPhote(pageNO)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subject<Photos>() {
+                .subscribe(new Subject<Data>() {
                     @Override
                     public boolean hasObservers() {
                         return false;
@@ -57,7 +55,7 @@ public class ZhijinRepository implements ZhijinDataSource {
                     }
 
                     @Override
-                    protected void subscribeActual(Observer<? super Photos> observer) {
+                    protected void subscribeActual(Observer<? super Data> observer) {
 
                     }
 
@@ -67,7 +65,7 @@ public class ZhijinRepository implements ZhijinDataSource {
                     }
 
                     @Override
-                    public void onNext(final Photos value) {
+                    public void onNext(final Data value) {
                         if(value.getError()){
                             callback.onFail();
                         }else {
