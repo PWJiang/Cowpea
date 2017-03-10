@@ -1,6 +1,7 @@
 package com.jiangpingwei.cowpea.zhijin;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
@@ -14,7 +15,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.jiangpingwei.cowpea.OnRecyclerItemClickListener;
+import com.jiangpingwei.cowpea.PhotoActivity;
 import com.jiangpingwei.cowpea.R;
+import com.jiangpingwei.cowpea.WebActivity;
 import com.jiangpingwei.cowpea.data.Results;
 import com.jiangpingwei.cowpea.data.ZhijinRepository;
 
@@ -63,6 +67,22 @@ public class ZhijinFragment extends Fragment implements ZhijinContract.View {
 
         rvZhijin.setLayoutManager(gridLayoutManager);
         rvZhijin.setAdapter(zhijinAdapter);
+
+        rvZhijin.addOnItemTouchListener(new OnRecyclerItemClickListener(rvZhijin) {
+            @Override
+            public void onItemClick(RecyclerView.ViewHolder viewHolder) {
+                ZhijinAdapter.ZhijinViewHolder zhijinViewHolder = (ZhijinAdapter.ZhijinViewHolder) viewHolder;
+                Intent intent = new Intent();
+                intent.setClass(getActivity(), PhotoActivity.class);
+                intent.putExtra("IMAGEURL", zhijinViewHolder.imageURL);
+                startActivity(intent);
+            }
+
+            @Override
+            public void onItemLongClick(RecyclerView.ViewHolder viewHolder) {
+
+            }
+        });
 
         return view;
     }
@@ -125,6 +145,8 @@ public class ZhijinFragment extends Fragment implements ZhijinContract.View {
         public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
             ZhijinViewHolder zhijinViewHolder = (ZhijinViewHolder) holder;
             Glide.with(context).load(mList.get(position).getUrl()).centerCrop().into(zhijinViewHolder.ivItemZhijin);
+
+            zhijinViewHolder.imageURL = mList.get(position).getUrl();
         }
 
         @Override
@@ -139,6 +161,8 @@ public class ZhijinFragment extends Fragment implements ZhijinContract.View {
         public static class ZhijinViewHolder extends RecyclerView.ViewHolder {
             @BindView(R.id.iv_item_zhijin)
             ImageView ivItemZhijin;
+
+            private String imageURL;
 
             private ZhijinViewHolder(View itemView) {
                 super(itemView);

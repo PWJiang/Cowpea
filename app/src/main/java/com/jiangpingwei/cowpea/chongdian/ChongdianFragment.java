@@ -1,6 +1,7 @@
 package com.jiangpingwei.cowpea.chongdian;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
@@ -17,7 +18,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.jiangpingwei.cowpea.OnRecyclerItemClickListener;
 import com.jiangpingwei.cowpea.R;
+import com.jiangpingwei.cowpea.WebActivity;
 import com.jiangpingwei.cowpea.data.ChongdianRepository;
 import com.jiangpingwei.cowpea.data.Results;
 
@@ -68,6 +71,22 @@ public class ChongdianFragment extends Fragment implements ChongdianContract.Vie
 
         rvChongdian.setLayoutManager(linearLayoutManager);
         rvChongdian.setAdapter(chongdianAdapter);
+
+        rvChongdian.addOnItemTouchListener(new OnRecyclerItemClickListener(rvChongdian) {
+            @Override
+            public void onItemClick(RecyclerView.ViewHolder viewHolder) {
+                ChongdianAdapter.ChongdianViewHolder chongdianViewHolder = (ChongdianAdapter.ChongdianViewHolder) viewHolder;
+                Intent intent = new Intent();
+                intent.setClass(getActivity(), WebActivity.class);
+                intent.putExtra("URL", chongdianViewHolder.url);
+                startActivity(intent);
+            }
+
+            @Override
+            public void onItemLongClick(RecyclerView.ViewHolder viewHolder) {
+
+            }
+        });
 
         Toolbar toolbar = (Toolbar) getActivity().findViewById(R.id.tl_main);
         toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
@@ -162,6 +181,8 @@ public class ChongdianFragment extends Fragment implements ChongdianContract.Vie
 
             chongdianViewHolder.tvItemChongdianDesc.setText(mList.get(position).getDesc());
             chongdianViewHolder.tvItemChongdianTime.setText((mList.get(position).getPublishedAt()));
+
+            chongdianViewHolder.url = mList.get(position).getUrl();
         }
 
         @Override
@@ -181,6 +202,8 @@ public class ChongdianFragment extends Fragment implements ChongdianContract.Vie
             TextView tvItemChongdianDesc;
             @BindView(R.id.tv_item_chongdian_time)
             TextView tvItemChongdianTime;
+
+            public String url;
 
             private ChongdianViewHolder(View itemView) {
                 super(itemView);
