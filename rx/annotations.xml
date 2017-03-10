@@ -1,0 +1,5 @@
+<root>
+    <item name='rx.Subscriber'>
+        <annotation name='java.lang.Deprecated' />
+    </item>
+</root>

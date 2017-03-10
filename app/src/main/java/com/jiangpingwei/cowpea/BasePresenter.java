@@ -1,10 +1,10 @@
 package com.jiangpingwei.cowpea;
 
 /**
- * Created by jiangpingwei on 2017/2/21.
+ * Created by jiangpingwei on 2017/3/8.
  */
 
 public interface BasePresenter {
-    // 规定Presenter必须要实现start方法。
-    void start();
+    void subscribe(int pageNO);
+    void unsubscribe();
 }

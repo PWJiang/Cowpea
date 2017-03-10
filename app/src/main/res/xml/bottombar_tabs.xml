@@ -2,14 +2,14 @@
 <tabs>
     <tab
         id="@+id/tab_book"
-        icon="@mipmap/ic_book"
-        title="@string/book" />
+        icon="@mipmap/zhijin"
+        title="@string/zhijin" />
     <tab
         id="@+id/tab_movie"
-        icon="@mipmap/ic_movie"
+        icon="@mipmap/movie"
         title="@string/movie" />
     <tab
         id="@+id/tab_music"
-        icon="@mipmap/ic_music"
-        title="@string/music" />
+        icon="@mipmap/chongdian"
+        title="@string/chongdian" />
 </tabs>

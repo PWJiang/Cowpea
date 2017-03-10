@@ -1,4 +1,4 @@
-package com.jiangpingwei.cowpea.music;
+package com.jiangpingwei.cowpea.chongdian;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -13,11 +13,11 @@ import com.jiangpingwei.cowpea.R;
  * Created by jiangpingwei on 2017/2/22.
  */
 
-public class MusicFragment extends Fragment {
+public class ChongdianFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_music, container, false);
+        View view = inflater.inflate(R.layout.fragment_chongdian, container, false);
         return view;
     }
 }

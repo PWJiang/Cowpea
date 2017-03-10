@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Cowpea</string>
-    <string name="book">书</string>
-    <string name="movie">影</string>
-    <string name="music">音</string>
+    <string name="zhijin">纸巾</string>
+    <string name="movie">视频</string>
+    <string name="chongdian">充电</string>
+    <string name="error">出错啦...</string>
 </resources>

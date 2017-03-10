@@ -8,9 +8,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 
-import com.jiangpingwei.cowpea.book.BookFragment;
+import com.jiangpingwei.cowpea.zhijin.ZhijinFragment;
 import com.jiangpingwei.cowpea.movie.MovieFragment;
-import com.jiangpingwei.cowpea.music.MusicFragment;
+import com.jiangpingwei.cowpea.chongdian.ChongdianFragment;
+import com.jiangpingwei.cowpea.zhijin.ZhijinPresenter;
+import com.jiangpingwei.cowpea.zhijin.data.ZhijinRepository;
 import com.roughike.bottombar.BottomBar;
 import com.roughike.bottombar.OnTabSelectListener;
 
@@ -26,9 +28,9 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.content_container_main)
     FrameLayout contentContainerMain;
 
-    private BookFragment bookFragment;
+    private ZhijinFragment zhijinFragment;
     private MovieFragment movieFragment;
-    private MusicFragment musicFragment;
+    private ChongdianFragment chongdianFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,11 +50,11 @@ public class MainActivity extends AppCompatActivity {
 
                 switch (tabId) {
                     case R.id.tab_book:
-                        if (bookFragment == null) {
-                            bookFragment = new BookFragment();
+                        if (zhijinFragment == null) {
+                            zhijinFragment = new ZhijinFragment();
                         }
 
-                        transation.replace(R.id.content_container_main, bookFragment);
+                        transation.replace(R.id.content_container_main, zhijinFragment);
                         transation.commit();
                         break;
                     case R.id.tab_movie:
@@ -64,24 +66,25 @@ public class MainActivity extends AppCompatActivity {
                         transation.commit();
                         break;
                     case R.id.tab_music:
-                        if (musicFragment == null) {
-                            musicFragment = new MusicFragment();
+                        if (chongdianFragment == null) {
+                            chongdianFragment = new ChongdianFragment();
                         }
 
-                        transation.replace(R.id.content_container_main, musicFragment);
+                        transation.replace(R.id.content_container_main, chongdianFragment);
                         transation.commit();
                         break;
                 }
             }
         });
+
     }
 
     /**
      * 初始化Fragment
      */
     private void initFragment() {
-        bookFragment = new BookFragment();
+        zhijinFragment = new ZhijinFragment();
         movieFragment = new MovieFragment();
-        musicFragment = new MusicFragment();
+        chongdianFragment = new ChongdianFragment();
     }
 }

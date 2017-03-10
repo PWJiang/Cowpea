@@ -14,10 +14,12 @@ import com.jiangpingwei.cowpea.R;
  */
 
 public class MovieFragment extends Fragment {
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_movie, container, false);
         return view;
     }
+
 }
