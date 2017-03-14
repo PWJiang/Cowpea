@@ -8,4 +8,9 @@
     <string name="IOS">IOS</string>
     <string name="qianduan">前端</string>
     <string name="expand_resources">拓展资源</string>
+    <string name="hot">热门</string>
+    <string name="funny">搞笑</string>
+    <string name="goddess">女神</string>
+    <string name="food">美食</string>
+    <string name="baby">宝宝</string>
 </resources>

@@ -37,8 +37,8 @@ public class ZhijinPresenter implements ZhijinContract.Presenter {
     }
 
     @Override
-    public void subscribe(String dataType, int pageNO) {
-        loadPhotos(pageNO);
+    public void subscribe(boolean isNewData, String dataType, int pageNO) {
+        loadPhotos(isNewData, pageNO);
     }
 
     @Override
@@ -46,14 +46,18 @@ public class ZhijinPresenter implements ZhijinContract.Presenter {
         mSubscriptions.dispose();
     }
 
-    private void loadPhotos(final int pageNO) {
+    private void loadPhotos(final boolean isNewData, final int pageNO) {
         mView.showProgress();
 
         mZhijinRepository.getPhotos(new ZhijinDataSource.GetPhotosCallback() {
             @Override
             public void onGetPhotoed(List<Results> resultses) {
                 data = resultses;
-                mView.showPhotos();
+                if(isNewData){
+                    mView.showNewPhotos();
+                }else {
+                    mView.showPhotos();
+                }
                 mView.hideProgress();
             }
 

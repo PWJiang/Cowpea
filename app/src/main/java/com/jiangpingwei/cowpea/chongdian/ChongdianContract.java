@@ -20,6 +20,8 @@ public interface ChongdianContract {
         void showDatas();
 
         void showError();
+
+        void showNewDatas();
     }
 
     interface Present extends BasePresenter {

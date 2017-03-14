@@ -36,8 +36,8 @@ public class ChongdianPresenter implements ChongdianContract.Present {
     }
 
     @Override
-    public void subscribe(String dataType, int pageNO) {
-        loadData(dataType, pageNO);
+    public void subscribe(boolean isNewData, String dataType, int pageNO) {
+        loadData(isNewData, dataType, pageNO);
     }
 
     @Override
@@ -45,14 +45,19 @@ public class ChongdianPresenter implements ChongdianContract.Present {
         mSubscriptions.dispose();
     }
 
-    private void loadData(String dataType, int pageNO) {
+    private void loadData(final boolean isNewData, String dataType, int pageNO) {
         mView.showProgress();
 
         mChongdianRepository.getData(new ChongdianDataSource.getDataCallback() {
             @Override
             public void onGetDataed(List<Results> resultses) {
                 data = resultses;
-                mView.showDatas();
+                if(isNewData){
+                    mView.showNewDatas();
+                }else {
+                    mView.showDatas();
+                }
+
                 mView.hideProgress();
             }
 

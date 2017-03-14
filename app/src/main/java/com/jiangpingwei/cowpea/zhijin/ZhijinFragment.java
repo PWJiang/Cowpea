@@ -18,10 +18,10 @@ import com.bumptech.glide.Glide;
 import com.jiangpingwei.cowpea.OnRecyclerItemClickListener;
 import com.jiangpingwei.cowpea.PhotoActivity;
 import com.jiangpingwei.cowpea.R;
-import com.jiangpingwei.cowpea.WebActivity;
 import com.jiangpingwei.cowpea.data.Results;
 import com.jiangpingwei.cowpea.data.ZhijinRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -43,7 +43,9 @@ public class ZhijinFragment extends Fragment implements ZhijinContract.View {
     private GridLayoutManager gridLayoutManager;
     private ZhijinAdapter zhijinAdapter;
 
-    private Random random = new Random();
+    private int lastVisibleItem;
+
+    private int pageNO = 1;
 
     public ZhijinFragment() {
         mPresenter = new ZhijinPresenter(this, new ZhijinRepository());
@@ -58,7 +60,23 @@ public class ZhijinFragment extends Fragment implements ZhijinContract.View {
         swlZhijin.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                mPresenter.subscribe(null, random.nextInt(10));
+                mPresenter.subscribe(true, null, 1);
+            }
+        });
+
+        rvZhijin.setOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                if (newState == RecyclerView.SCROLL_STATE_IDLE && lastVisibleItem + 1 == zhijinAdapter.getItemCount()) {
+                    mPresenter.subscribe(false, null, pageNO++);
+                }
+            }
+
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                lastVisibleItem = gridLayoutManager.findLastVisibleItemPosition();
             }
         });
 
@@ -83,6 +101,8 @@ public class ZhijinFragment extends Fragment implements ZhijinContract.View {
 
             }
         });
+
+        mPresenter.subscribe(false, null, 1);
 
         return view;
     }
@@ -113,9 +133,13 @@ public class ZhijinFragment extends Fragment implements ZhijinContract.View {
     }
 
     @Override
+    public void showNewPhotos() {
+        zhijinAdapter.setNewList(mPresenter.getData(), getActivity());
+    }
+
+    @Override
     public void onResume() {
         super.onResume();
-        mPresenter.subscribe(null, random.nextInt(10));
     }
 
     @Override
@@ -126,11 +150,18 @@ public class ZhijinFragment extends Fragment implements ZhijinContract.View {
 
     public static class ZhijinAdapter extends RecyclerView.Adapter {
 
-        private List<Results> mList;
+        private List<Results> mList = new ArrayList<>();
         private Context context;
 
         public void setList(List<Results> list, Context context) {
-            this.mList = list;
+            mList.addAll(list);
+            this.context = context;
+            notifyDataSetChanged();
+        }
+
+        public void setNewList(List<Results> list, Context context) {
+            mList.clear();
+            mList.addAll(list);
             this.context = context;
             notifyDataSetChanged();
         }

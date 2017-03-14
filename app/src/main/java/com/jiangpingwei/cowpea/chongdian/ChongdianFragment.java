@@ -24,6 +24,7 @@ import com.jiangpingwei.cowpea.WebActivity;
 import com.jiangpingwei.cowpea.data.ChongdianRepository;
 import com.jiangpingwei.cowpea.data.Results;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -49,6 +50,9 @@ public class ChongdianFragment extends Fragment implements ChongdianContract.Vie
 
     private String dataType = "Android";
 
+    private int lastVisibleItem;
+    private int pageNO = 1;
+
     public ChongdianFragment() {
         mPresenter = new ChongdianPresenter(this, new ChongdianRepository());
     }
@@ -62,7 +66,23 @@ public class ChongdianFragment extends Fragment implements ChongdianContract.Vie
         swlChongdian.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                mPresenter.subscribe(dataType, random.nextInt(10));
+                mPresenter.subscribe(true, dataType, 1);
+            }
+        });
+
+        rvChongdian.setOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                if (newState == RecyclerView.SCROLL_STATE_IDLE && lastVisibleItem + 1 == chongdianAdapter.getItemCount()) {
+                    mPresenter.subscribe(false, dataType, pageNO++);
+                }
+            }
+
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                lastVisibleItem = linearLayoutManager.findLastVisibleItemPosition();
             }
         });
 
@@ -106,10 +126,12 @@ public class ChongdianFragment extends Fragment implements ChongdianContract.Vie
                         dataType = "拓展资源";
                         break;
                 }
-                mPresenter.subscribe(dataType, random.nextInt(10));
+                mPresenter.subscribe(true, dataType, 1);
                 return true;
             }
         });
+
+        mPresenter.subscribe(false, dataType, 1);
 
         return view;
     }
@@ -140,9 +162,13 @@ public class ChongdianFragment extends Fragment implements ChongdianContract.Vie
     }
 
     @Override
+    public void showNewDatas() {
+        chongdianAdapter.setNewList(mPresenter.getData(),getActivity());
+    }
+
+    @Override
     public void onResume() {
         super.onResume();
-        mPresenter.subscribe(dataType, random.nextInt(10));
     }
 
     @Override
@@ -153,11 +179,18 @@ public class ChongdianFragment extends Fragment implements ChongdianContract.Vie
 
     public static class ChongdianAdapter extends RecyclerView.Adapter {
 
-        private List<Results> mList;
+        private List<Results> mList = new ArrayList<>();
         private Context context;
 
         public void setList(List<Results> list, Context context) {
-            this.mList = list;
+            this.mList.addAll(list);
+            this.context = context;
+            notifyDataSetChanged();
+        }
+
+        public void setNewList(List<Results> list, Context context) {
+            this.mList.clear();
+            this.mList.addAll(list);
             this.context = context;
             notifyDataSetChanged();
         }

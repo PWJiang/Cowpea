@@ -21,6 +21,7 @@ public interface ZhijinContract {
 
         void showError();
 
+        void showNewPhotos();
     }
 
     interface Presenter extends BasePresenter{

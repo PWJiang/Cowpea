@@ -71,6 +71,8 @@ public class MainActivity extends AppCompatActivity {
                         transation.commit();
 
                         tlMain.getMenu().clear();
+
+                        tlMain.inflateMenu(R.menu.menu_movie);
                         break;
                     case R.id.tab_music:
                         if (chongdianFragment == null) {
@@ -80,6 +82,7 @@ public class MainActivity extends AppCompatActivity {
                         transation.replace(R.id.content_container_main, chongdianFragment);
                         transation.commit();
 
+                        tlMain.getMenu().clear();
                         tlMain.inflateMenu(R.menu.menu_chongdian);
                         break;
                 }

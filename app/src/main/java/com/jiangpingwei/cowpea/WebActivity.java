@@ -37,6 +37,8 @@ public class WebActivity extends AppCompatActivity {
 
 
         WebSettings settings = wvWeb.getSettings();
+        //不开启视频无法播放
+        settings.setDomStorageEnabled(true);
         settings.setJavaScriptEnabled(true);
         settings.setLoadWithOverviewMode(true);
         settings.setAppCacheEnabled(true);
@@ -89,7 +91,12 @@ public class WebActivity extends AppCompatActivity {
     private class LoveClient extends WebViewClient {
 
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
-            if (url != null) view.loadUrl(url);
+            if (url.contains("mtmv://")) {
+                return false;
+            } else {
+                if (url != null) view.loadUrl(url);
+            }
+
             return true;
         }
     }
