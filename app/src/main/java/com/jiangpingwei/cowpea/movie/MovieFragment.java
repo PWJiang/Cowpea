@@ -209,7 +209,7 @@ public class MovieFragment extends Fragment implements MovieContract.View {
             MovieViewHolder movieViewHolder = (MovieViewHolder) holder;
             if (!TextUtils.isEmpty(mList.get(position).getAvatar())) {
                 movieViewHolder.ivItemMovie.setVisibility(View.VISIBLE);
-                Glide.with(context).load(mList.get(position).getAvatar()).fitCenter().into(movieViewHolder.ivItemMovie);
+                Glide.with(context).load(mList.get(position).getAvatar()).thumbnail(0.1f).fitCenter().into(movieViewHolder.ivItemMovie);
             } else {
                 movieViewHolder.ivItemMovie.setVisibility(View.GONE);
             }

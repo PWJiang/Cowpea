@@ -23,7 +23,6 @@ import com.jiangpingwei.cowpea.data.ZhijinRepository;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -175,7 +174,7 @@ public class ZhijinFragment extends Fragment implements ZhijinContract.View {
         @Override
         public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
             ZhijinViewHolder zhijinViewHolder = (ZhijinViewHolder) holder;
-            Glide.with(context).load(mList.get(position).getUrl()).centerCrop().into(zhijinViewHolder.ivItemZhijin);
+            Glide.with(context).load(mList.get(position).getUrl()).thumbnail(0.1f).centerCrop().into(zhijinViewHolder.ivItemZhijin);
 
             zhijinViewHolder.imageURL = mList.get(position).getUrl();
         }

@@ -29,7 +29,7 @@ public class PhotoActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         imageUrl = getIntent().getStringExtra("IMAGEURL");
-        Glide.with(this).load(imageUrl).into(ivPhoto);
+        Glide.with(this).load(imageUrl).thumbnail(0.1f).into(ivPhoto);
         setupPhotoAttacher();
     }
 

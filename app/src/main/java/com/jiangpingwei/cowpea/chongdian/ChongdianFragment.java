@@ -207,7 +207,7 @@ public class ChongdianFragment extends Fragment implements ChongdianContract.Vie
 
             if (null != mList.get(position).getImages() && mList.size() > 0) {
                 chongdianViewHolder.ivItemChongdian.setVisibility(View.VISIBLE);
-                Glide.with(context).load(mList.get(position).getImages().get(0)).fitCenter().into(chongdianViewHolder.ivItemChongdian);
+                Glide.with(context).load(mList.get(position).getImages().get(0)).thumbnail(0.1f).fitCenter().into(chongdianViewHolder.ivItemChongdian);
             } else {
                 chongdianViewHolder.ivItemChongdian.setVisibility(View.GONE);
             }
