@@ -26,7 +26,6 @@ import com.jiangpingwei.cowpea.data.Results;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -45,8 +44,6 @@ public class ChongdianFragment extends Fragment implements ChongdianContract.Vie
 
     private LinearLayoutManager linearLayoutManager;
     private ChongdianAdapter chongdianAdapter;
-
-    private Random random = new Random();
 
     private String dataType = "Android";
 
@@ -163,7 +160,7 @@ public class ChongdianFragment extends Fragment implements ChongdianContract.Vie
 
     @Override
     public void showNewDatas() {
-        chongdianAdapter.setNewList(mPresenter.getData(),getActivity());
+        chongdianAdapter.setNewList(mPresenter.getData(), getActivity());
     }
 
     @Override
