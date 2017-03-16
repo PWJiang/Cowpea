@@ -66,6 +66,26 @@ public class WebActivity extends AppCompatActivity {
         return super.onKeyDown(keyCode, event);
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (wvWeb != null) wvWeb.destroy();
+    }
+
+
+    @Override
+    protected void onPause() {
+        if (wvWeb != null) wvWeb.onPause();
+        super.onPause();
+    }
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (wvWeb != null) wvWeb.onResume();
+    }
+
 
     private class ChromeClient extends WebChromeClient {
 
